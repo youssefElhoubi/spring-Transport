@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/tx
-        https://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+        https://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/data/jpa
+        https://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
-    <!-- ==================== Database Connection ==================== -->
+    <!-- ==================== Property Placeholder ==================== -->
     <context:property-placeholder location="classpath:application.properties"/>
 
-    <!-- DataSource Bean (manual wiring using property placeholders) -->
+    <!-- ==================== DataSource ==================== -->
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
         <property name="driverClassName" value="${spring.datasource.driver-class-name}"/>
         <property name="url" value="${spring.datasource.url}"/>
@@ -18,18 +24,40 @@
         <property name="password" value="${spring.datasource.password}"/>
     </bean>
 
-    <!-- ==================== EntityManager Factory ==================== -->
+    <!-- ==================== EntityManagerFactory ==================== -->
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="persistenceUnitName" value="myPersistenceUnit"/>
+        <property name="packagesToScan" value="com.transports.transport.entities"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="showSql" value="true"/>
+                <property name="generateDdl" value="true"/>
+            </bean>
+        </property>
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
     </bean>
 
     <!-- ==================== Transaction Manager ==================== -->
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <!-- ==================== DAO Beans ==================== -->
+    <!-- ==================== Spring Data JPA Repositories ==================== -->
+    <jpa:repositories
+            base-package="com.transports.transport.repository"
+            entity-manager-factory-ref="entityManagerFactory"
+            transaction-manager-ref="transactionManager"/>
+
 
     <!-- ==================== Service Beans ==================== -->
+    <bean id="deliveryService" class="com.transports.transport.service.DeliveryService">
+        <constructor-arg ref="deliveryRepository"/>
+    </bean>
+
 </beans>

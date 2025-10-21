@@ -30,6 +30,10 @@ public class Delivery {
 
     private Integer sequenceOrder;
 
+    @ManyToOne
+    @JoinColumn(name = "tour_id")
+    private Tour tour;
+
     public Delivery(Long id, String address, Double latitude, Double longitude, Double weight, Double volume, String preferredTimeSlot, DeliveryStatus status, Integer sequenceOrder) {
         this.id = id;
         this.address = address;

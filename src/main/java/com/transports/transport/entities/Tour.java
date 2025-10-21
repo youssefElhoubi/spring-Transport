@@ -16,16 +16,20 @@ public class Tour {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDate date ;
+    @Column(nullable = false, name = "date")
+    private LocalDate date;
     @ManyToOne
     @JoinColumn(name = "vehicle_id")
-    private Vehicul vehicle ;
-    private List<Delivery> deliveries ;
-    private Double totalDistance ;
-    private DeliveryStatus status ;
+    private Vehicul vehicle;
+    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Delivery> deliveries;
+    @Column(nullable = false)
+    private Double totalDistance;
+    @Enumerated(EnumType.STRING)
+    private DeliveryStatus status;
     @ManyToOne
     @JoinColumn(name = "warehouse_id")
-    private Warehouse warehouse ;
+    private Warehouse warehouse;
 
     public Tour() {
     }
