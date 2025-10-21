@@ -26,4 +26,17 @@ public class Tour {
     @ManyToOne
     @JoinColumn(name = "warehouse_id")
     private Warehouse warehouse ;
+
+    public Tour() {
+    }
+
+    public Tour(Long id, LocalDate date, Vehicul vehicle, List<Delivery> deliveries, Double totalDistance, DeliveryStatus status, Warehouse warehouse) {
+        this.id = id;
+        this.date = date;
+        this.vehicle = vehicle;
+        this.deliveries = deliveries;
+        this.totalDistance = totalDistance;
+        this.status = status;
+        this.warehouse = warehouse;
+    }
 }
