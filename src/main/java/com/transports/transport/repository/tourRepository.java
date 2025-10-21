@@ -3,5 +3,5 @@ package com.transports.transport.repository;
 import com.transports.transport.entities.Tour;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface tour extends JpaRepository<Tour, Long> {
+public interface tourRepository extends JpaRepository<Tour, Long> {
 }
