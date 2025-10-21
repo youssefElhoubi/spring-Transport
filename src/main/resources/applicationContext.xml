@@ -65,6 +65,9 @@
     <bean id="vehiculService" class="com.transports.transport.service.VehiculService">
         <constructor-arg ref="vehiculRepository"/>
     </bean>
+    <bean id="warehouseService" class="com.transports.transport.service.WarehouseService">
+        <constructor-arg ref="warehouseRepository"/>
+    </bean>
 
 
 </beans>
