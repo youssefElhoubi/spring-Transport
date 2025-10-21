@@ -31,7 +31,7 @@ public class Delivery {
     private Integer sequenceOrder;
 
     @ManyToOne
-    @JoinColumn(name = "tour_id")
+    @JoinColumn(name = "tour_id", nullable = false)
     private Tour tour;
 
     public Delivery(Long id, String address, Double latitude, Double longitude, Double weight, Double volume, String preferredTimeSlot, DeliveryStatus status, Integer sequenceOrder) {
