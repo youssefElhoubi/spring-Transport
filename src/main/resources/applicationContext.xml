@@ -59,5 +59,8 @@
     <bean id="deliveryService" class="com.transports.transport.service.DeliveryService">
         <constructor-arg ref="deliveryRepository"/>
     </bean>
+    <bean id="tourService" class="com.transports.transport.service.TourService">
+        <constructor-arg ref="tourRepository"/>
+    </bean>
 
 </beans>
