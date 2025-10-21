@@ -1,4 +1,11 @@
 package com.transports.transport.service;
 
-public class WarehouseRepository {
+import com.transports.transport.repository.WarehouseRepository;
+
+public class WarehouseService {
+    private WarehouseRepository warehouseRepository;
+
+    public WarehouseService(WarehouseRepository warehouseRepository) {
+        this.warehouseRepository = warehouseRepository;
+    }
 }
