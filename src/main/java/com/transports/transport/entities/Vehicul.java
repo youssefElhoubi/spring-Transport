@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name ="vehicul")
-public class vehicul {
+public class Vehicul {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -23,13 +23,13 @@ public class vehicul {
     @Column(name = "max_deliveries" ,nullable = false)
     private Double maxDeliveries;
 
-    public vehicul(Long id, VehicleType type, Double maxWeight, Double maxVolume, Double maxDeliveries) {
+    public Vehicul(Long id, VehicleType type, Double maxWeight, Double maxVolume, Double maxDeliveries) {
         this.id = id;
         this.type = type;
         this.maxWeight = maxWeight;
         this.maxVolume = maxVolume;
         this.maxDeliveries = maxDeliveries;
     }
-    public vehicul() {
+    public Vehicul() {
     }
 }
