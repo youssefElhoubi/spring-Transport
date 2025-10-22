@@ -1,9 +1,11 @@
 package com.transports.transport.service;
 
-public class DeliveryService {
-    private DeliveryService deliveryService;
+import com.transports.transport.repository.DeliveryRepository;
 
-    public DeliveryService(DeliveryService deliveryService) {
+public class DeliveryService {
+    private DeliveryRepository deliveryService;
+
+    public DeliveryService(DeliveryRepository deliveryService) {
         this.deliveryService = deliveryService;
     }
 }
