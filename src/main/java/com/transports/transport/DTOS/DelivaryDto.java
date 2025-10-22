@@ -11,7 +11,7 @@ public class DelivaryDto {
     @NotBlank(message = "address is required")
     private String address;
 
-    @NotBlank(message = "latitude is required")
+    @NotNull(message = "latitude is required")
     @DecimalMin(value = "-90.0", message = "Latitude must be greater than or equal to -90")
     @DecimalMax(value = "90.0", message = "Latitude must be less than or equal to 90")
     private Double latitude;
