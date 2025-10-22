@@ -16,7 +16,7 @@ public class DeliveryService {
         return deliveryRepository.findAll();
     }
     public Delivery findById(Long id) {
-        return deliveryRepository.findById(id).get();
+        return deliveryRepository.findById(id).orElseThrow(()->new RuntimeException("no Delivery found with this ID"+ id) );
     }
     public Delivery save (Delivery d){
         return deliveryRepository.save(d);
