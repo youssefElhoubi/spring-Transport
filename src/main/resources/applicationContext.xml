@@ -68,9 +68,11 @@
     <bean id="warehouseService" class="com.transports.transport.service.WarehouseService">
         <constructor-arg ref="warehouseRepository"/>
     </bean>
+    <bean id="deliveryMaper" class="com.transports.transport.Mapers.DeliveryMaper" abstract="true"/>
 
     <bean id="deliveryController" class="com.transports.transport.controllers.DeliveryController" >
         <constructor-arg ref="deliveryService"/>
+        <constructor-arg ref="deliveryMaper" />
     </bean>
 
 
