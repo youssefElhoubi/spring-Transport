@@ -6,10 +6,10 @@ import com.transports.transport.repository.DeliveryRepository;
 import java.util.List;
 
 public class DeliveryService {
-    private DeliveryRepository deliveryRepository;
+    private final DeliveryRepository deliveryRepository;
 
-    public DeliveryService(DeliveryRepository deliveryService) {
-        this.deliveryRepository = deliveryService;
+    public DeliveryService(DeliveryRepository deliveryrepository) {
+        this.deliveryRepository = deliveryrepository;
     }
 
     public List<Delivery> findAll() {
