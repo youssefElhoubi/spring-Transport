@@ -10,5 +10,5 @@ public interface VehiculMapper {
     VehiculMapper INSTENCE = Mappers.getMapper(VehiculMapper.class);
 
     Vehicul toEntity(VehiculDTO dto);
-    VehiculDTO toDTO (Vehicul vehicul );
+    VehiculDTO toDto(Vehicul vehicul );
 }
