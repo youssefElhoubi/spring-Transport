@@ -10,5 +10,5 @@ public interface WarehouseMapper {
     WarehouseMapper INSTENCE = Mappers.getMapper(WarehouseMapper.class);
 
     Warehouse toEntity(WarehouseDTO dto);
-    WarehouseDTO toDTO (Warehouse warehouse );
+    WarehouseDTO toDto (Warehouse warehouse );
 }
