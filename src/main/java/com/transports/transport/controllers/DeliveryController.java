@@ -7,6 +7,7 @@ import com.transports.transport.entities.Delivery;
 import com.transports.transport.service.DeliveryService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public class DeliveryController {
         return deliveries;
     }
     @PostMapping
-    public ResponseEntity<?> Create(@Valid @RequestBody DelivaryDto dto){
+    public ResponseEntity<?> Create(@Validated(DelivaryDto.create.class) @RequestBody DelivaryDto dto){
         Delivery delivary = deliveryMaper.toEntity(dto);
         delivary= deliverySer.save(delivary);
         return ResponseEntity.ok(delivary);
