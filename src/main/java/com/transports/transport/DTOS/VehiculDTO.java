@@ -9,18 +9,24 @@ import lombok.Setter;
 @Getter
 @Setter
 public class VehiculDTO {
+    public interface create {
+    }
+
+    public interface update {
+    }
+
     @NotNull(message = "Vehicle type is required")
     private VehicleType type;
 
-    @NotNull(message = "Maximum weight is required")
-    @Positive(message = "Maximum weight must be positive")
+    @NotNull(message = "Maximum weight is required", groups = create.class)
+    @Positive(message = "Maximum weight must be positive", groups = {create.class, update.class})
     private Double maxWeight;
 
-    @NotNull(message = "Maximum volume is required")
-    @Positive(message = "Maximum volume must be positive")
+    @NotNull(message = "Maximum volume is required", groups = create.class)
+    @Positive(message = "Maximum volume must be positive" , groups = {create.class, update.class})
     private Double maxVolume;
 
-    @NotNull(message = "Maximum deliveries count is required")
-    @Positive(message = "Maximum deliveries must be positive")
+    @NotNull(message = "Maximum deliveries count is required", groups = create.class)
+    @Positive(message = "Maximum deliveries must be positive" , groups = {create.class, update.class})
     private Double maxDeliveries;
 }
