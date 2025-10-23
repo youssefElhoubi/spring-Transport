@@ -9,8 +9,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-@RequestMapping("vehicul")
+@RestController
+@RequestMapping("/vehicul")
 public class VehiculController {
     private final VehiculMapperImpl vehiculMapper;
     private final VehiculService vehiculService;

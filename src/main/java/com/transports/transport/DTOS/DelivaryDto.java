@@ -15,7 +15,7 @@ public class DelivaryDto {
     @NotBlank(groups = create.class, message = "address is required")
     private String address;
 
-    @NotBlank( groups = create.class , message = "latitude is required")
+    @NotNull( groups = create.class , message = "latitude is required")
     @DecimalMin(value = "-90.0", message = "Latitude must be greater than or equal to -90" ,groups = {create.class,update.class})
     @DecimalMax(value = "90.0", message = "Latitude must be less than or equal to 90",groups = {create.class,update.class})
     private Double latitude;

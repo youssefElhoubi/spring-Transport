@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("warehouse")
+@RequestMapping("/warehouse")
 public class WarehouseController {
     private final WarehouseService warehouseService;
-    private final WarehouseImpl warehouseImp;
+    private final WarehouseImpl warehouseMapper;
 
     public WarehouseController(WarehouseService warehouseService, WarehouseImpl warehouse) {
         this.warehouseService = warehouseService;
-        this.warehouseImp = warehouse;
+        this.warehouseMapper = warehouse;
     }
 
     // ✅ Get all warehouses
@@ -30,7 +30,7 @@ public class WarehouseController {
     // ✅ Create a new warehouse
     @PostMapping
     public ResponseEntity<?> create(@Validated(WarehouseDTO.create.class) @RequestBody WarehouseDTO dto) {
-        Warehouse warehouse = warehouseImp.toEntity(dto);
+        Warehouse warehouse = warehouseMapper.toEntity(dto);
         warehouse = warehouseService.save(warehouse);
         return ResponseEntity.ok(warehouse);
     }
@@ -43,7 +43,7 @@ public class WarehouseController {
             return ResponseEntity.notFound().build();
         }
 
-        Warehouse warehouse = warehouseImp.toEntity(dto);
+        Warehouse warehouse = warehouseMapper.toEntity(dto);
         warehouse.setId(id);
         warehouse = warehouseService.update(warehouse);
         return ResponseEntity.ok(warehouse);

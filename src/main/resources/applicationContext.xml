@@ -86,7 +86,7 @@
         <constructor-arg ref="vehiculService"/>
         <constructor-arg ref="vehiculMapper"/>
     </bean>
-    <bean id="WarehouseController" class="com.transports.transport.controllers.WarehouseController">
+    <bean id="warehouseController" class="com.transports.transport.controllers.WarehouseController">
         <constructor-arg ref="warehouseService"/>
         <constructor-arg ref="warehouseMapper"/>
     </bean>
