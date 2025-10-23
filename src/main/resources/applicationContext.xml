@@ -79,7 +79,7 @@
         <constructor-arg ref="deliveryMapper"/>
     </bean>
     <bean id="tourController" class="com.transports.transport.controllers.TourController">
-        <constructor-arg ref="tourRepository"/>
+        <constructor-arg ref="tourService"/>
         <constructor-arg ref="tourMapper"/>
     </bean>
 
