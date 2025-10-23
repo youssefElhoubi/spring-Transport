@@ -32,6 +32,25 @@ public class TourController {
         tour = tourService.save(tour);
         return ResponseEntity.ok(tour);
     }
+    @PatchMapping("/{id}")
+    public ResponseEntity<?> update(@Validated(TourDto.update.class) @RequestBody TourDto dto, @PathVariable Long id) {
+        Tour tour = tourService.findById(id);
+        if (tour == null) {
+            return ResponseEntity.notFound().build();
+        }
+        tour = tourMapper.toEntity(dto);
+        tour = tourService.update(tour);
+        return ResponseEntity.ok(tour);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id){
+        Tour tour = tourService.findById(id);
+        if (tour == null) {
+            return ResponseEntity.notFound().build();
+        }
+        tourService.deleteById(id);
+        return  ResponseEntity.ok("tour deleted ");
+    }
 
 
 }

@@ -36,7 +36,7 @@ public class DeliveryController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<?> update(@Validated(DelivaryDto.create.class) @RequestBody DelivaryDto dto, @PathVariable Long id) {
+    public ResponseEntity<?> update(@Validated(DelivaryDto.update.class) @RequestBody DelivaryDto dto, @PathVariable Long id) {
         Delivery delivery = deliverySer.findById(id);
         if (delivery == null) {
             return ResponseEntity.notFound().build();
