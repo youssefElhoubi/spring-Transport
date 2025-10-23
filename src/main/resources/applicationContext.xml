@@ -78,6 +78,19 @@
         <constructor-arg ref="deliveryService"/>
         <constructor-arg ref="deliveryMapper"/>
     </bean>
+    <bean id="tourController" class="com.transports.transport.controllers.TourController">
+        <constructor-arg ref="tourService"/>
+        <constructor-arg ref="tourMapper"/>
+    </bean>
+    <bean id="vehiculController" class="com.transports.transport.controllers.VehiculController">
+        <constructor-arg ref="vehiculService"/>
+        <constructor-arg ref="vehiculMapper"/>
+    </bean>
+    <bean id="warehouseController" class="com.transports.transport.controllers.WarehouseController">
+        <constructor-arg ref="warehouseService"/>
+        <constructor-arg ref="warehouseMapper"/>
+    </bean>
+
 
 
 </beans>

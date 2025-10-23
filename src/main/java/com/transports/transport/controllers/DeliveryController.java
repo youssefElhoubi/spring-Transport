@@ -1,14 +1,14 @@
 package com.transports.transport.controllers;
 
+import com.transports.transport.DTOS.DelivaryDto;
 import com.transports.transport.Mapers.DeliveryMaper;
+import com.transports.transport.MapperImplementation.DeliveryMapperImpl;
 import com.transports.transport.entities.Delivery;
 import com.transports.transport.service.DeliveryService;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,16 +17,42 @@ import java.util.List;
 public class DeliveryController {
     private final DeliveryService deliverySer;
     private final DeliveryMaper deliveryMaper;
-    @Autowired
-    public DeliveryController(DeliveryService deliveryService, DeliveryMaper deliveryMaper) {
+
+    public DeliveryController(DeliveryService deliveryService, DeliveryMapperImpl deliveryMaper) {
         this.deliverySer = deliveryService;
         this.deliveryMaper = deliveryMaper;
     }
-    @GetMapping("/all")
-    public List<Delivery> all(){
-        List<Delivery> deliveries = deliverySer.findAll();
-        return deliveries;
-    }
-//    public String Create(@Validated )
 
+    @GetMapping("/all")
+    public List<Delivery> all() {
+        return deliverySer.findAll();
+    }
+
+    @PostMapping
+    public ResponseEntity<?> create(@Validated(DelivaryDto.create.class) @RequestBody DelivaryDto dto) {
+        Delivery delivary = deliveryMaper.toEntity(dto);
+        delivary = deliverySer.save(delivary);
+        return ResponseEntity.ok(delivary);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<?> update(@Validated(DelivaryDto.update.class) @RequestBody DelivaryDto dto, @PathVariable Long id) {
+        Delivery delivery = deliverySer.findById(id);
+        if (delivery == null) {
+            return ResponseEntity.notFound().build();
+        }
+        delivery = deliveryMaper.toEntity(dto);
+        delivery.setId(id);
+        delivery = deliverySer.update(delivery);
+        return ResponseEntity.ok(delivery);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id){
+        Delivery delivery = deliverySer.findById(id);
+        if (delivery == null) {
+            return ResponseEntity.notFound().build();
+        }
+        deliverySer.Delete(id);
+        return  ResponseEntity.ok("delivery deleted ");
+    }
 }
