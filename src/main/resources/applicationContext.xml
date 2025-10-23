@@ -82,6 +82,10 @@
         <constructor-arg ref="tourService"/>
         <constructor-arg ref="tourMapper"/>
     </bean>
+    <bean id="vehiculController" class="com.transports.transport.controllers.VehiculController">
+        <constructor-arg ref="vehiculService"/>
+        <constructor-arg ref="vehiculMapper"/>
+    </bean>
 
 
 </beans>
