@@ -20,6 +20,7 @@ public class WarehouseController {
         this.warehouseService = warehouseService;
         this.warehouseImp = warehouse;
     }
+
     // ✅ Get all warehouses
     @GetMapping("/all")
     public List<Warehouse> all() {

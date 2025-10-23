@@ -42,6 +42,7 @@ public class DeliveryController {
             return ResponseEntity.notFound().build();
         }
         delivery = deliveryMaper.toEntity(dto);
+        delivery.setId(id);
         delivery = deliverySer.update(delivery);
         return ResponseEntity.ok(delivery);
     }
