@@ -35,4 +35,7 @@ public class DeliveryService {
         delivery.setTour(d.getTour()); // if you want to allow updating the tour
         return deliveryRepository.save(delivery);
     }
+    public void Delete (Long id ){
+        deliveryRepository.deleteById(id);
+    }
 }

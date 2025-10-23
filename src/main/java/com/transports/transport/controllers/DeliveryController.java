@@ -25,24 +25,32 @@ public class DeliveryController {
 
     @GetMapping("/all")
     public List<Delivery> all() {
-        List<Delivery> deliveries = deliverySer.findAll();
-        return deliveries;
+        return deliverySer.findAll();
     }
 
     @PostMapping
-    public ResponseEntity<?> Create(@Validated(DelivaryDto.create.class) @RequestBody DelivaryDto dto) {
+    public ResponseEntity<?> create(@Validated(DelivaryDto.create.class) @RequestBody DelivaryDto dto) {
         Delivery delivary = deliveryMaper.toEntity(dto);
         delivary = deliverySer.save(delivary);
         return ResponseEntity.ok(delivary);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<?> Update(@Validated(DelivaryDto.create.class) @RequestBody DelivaryDto dto, @PathVariable Long id) {
+    public ResponseEntity<?> update(@Validated(DelivaryDto.create.class) @RequestBody DelivaryDto dto, @PathVariable Long id) {
         Delivery delivery = deliverySer.findById(id);
         if (delivery == null) {
             return ResponseEntity.notFound().build();
         }
         delivery = deliverySer.update(delivery);
         return ResponseEntity.ok(delivery);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id){
+        Delivery delivery = deliverySer.findById(id);
+        if (delivery == null) {
+            return ResponseEntity.notFound().build();
+        }
+        deliverySer.Delete(id);
+        return  ResponseEntity.ok("delivery deleted ");
     }
 }
