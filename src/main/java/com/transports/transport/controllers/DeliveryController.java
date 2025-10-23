@@ -22,16 +22,27 @@ public class DeliveryController {
         this.deliverySer = deliveryService;
         this.deliveryMaper = deliveryMaper;
     }
+
     @GetMapping("/all")
-    public List<Delivery> all(){
+    public List<Delivery> all() {
         List<Delivery> deliveries = deliverySer.findAll();
         return deliveries;
     }
+
     @PostMapping
-    public ResponseEntity<?> Create(@Validated(DelivaryDto.create.class) @RequestBody DelivaryDto dto){
+    public ResponseEntity<?> Create(@Validated(DelivaryDto.create.class) @RequestBody DelivaryDto dto) {
         Delivery delivary = deliveryMaper.toEntity(dto);
-        delivary= deliverySer.save(delivary);
+        delivary = deliverySer.save(delivary);
         return ResponseEntity.ok(delivary);
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<?> Update(@Validated(DelivaryDto.create.class) @RequestBody DelivaryDto dto, @PathVariable Long id) {
+        Delivery delivery = deliverySer.findById(id);
+        if (delivery == null) {
+            return ResponseEntity.notFound().build();
+        }
+        delivery = deliverySer.update(delivery);
+        return ResponseEntity.ok(delivery);
+    }
 }
