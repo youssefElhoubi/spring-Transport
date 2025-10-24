@@ -9,10 +9,12 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.beans.Expression;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
-import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class DeliveryServiceTest {
@@ -40,4 +42,20 @@ class DeliveryServiceTest {
         });
         assertTrue(expression.getMessage().contains("no Delivery found with this ID"));
     }
+    Test
+    void testFindAll() {
+        Delivery d1 = new Delivery();
+        d1.setId(1L);
+        Delivery d2 = new Delivery();
+        d2.setId(2L);
+
+        when(deliveryRepository.findAll()).thenReturn(Arrays.asList(d1, d2));
+
+        List<Delivery> result = deliveryService.findAll();
+
+        assertEquals(2, result.size());
+        assertEquals(1L, result.get(0).getId());
+        verify(deliveryRepository, times(1)).findAll();
+    }
+
 }
