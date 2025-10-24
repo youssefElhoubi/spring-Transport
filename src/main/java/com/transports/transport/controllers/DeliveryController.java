@@ -27,10 +27,10 @@ public class DeliveryController {
     }
 
     @Operation(summary = "method allows to get all the Deliveries ", description = "make a request for the end point and get all the existing Deliveries")
-    @ApiResponses( value = {
-            @ApiResponse(responseCode = "200",description = "all the Deliveries "),
-            @ApiResponse(responseCode = "400", description = "Invalid input data")
-    })
+//    @ApiResponses( value = {
+//            @ApiResponse(responseCode = "200",description = "all the Deliveries "),
+//            @ApiResponse(responseCode = "400", description = "Invalid input data")
+//    })
     @GetMapping("/all")
     public List<Delivery> all() {
         return deliverySer.findAll();
