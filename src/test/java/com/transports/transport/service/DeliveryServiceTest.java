@@ -42,7 +42,7 @@ class DeliveryServiceTest {
         });
         assertTrue(expression.getMessage().contains("no Delivery found with this ID"));
     }
-    Test
+    @Test
     void testFindAll() {
         Delivery d1 = new Delivery();
         d1.setId(1L);
