@@ -7,6 +7,7 @@ import com.transports.transport.entities.Delivery;
 import com.transports.transport.entities.Tour;
 import com.transports.transport.repository.tourRepository;
 import com.transports.transport.service.TourService;
+import com.transports.transport.utils.NearestPointsSorter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -50,6 +51,12 @@ public class TourController {
         }
         tourService.deleteById(id);
         return  ResponseEntity.ok("tour deleted ");
+    }
+    @GetMapping("/optimize/{id}")
+    public  ResponseEntity<?> optimiseTour(@PathVariable Long id){
+        Tour tour = tourService.findById(id);
+        List<Delivery> optimizeDeliveis = NearestPointsSorter.sortDeliveriesByNearest(tour);
+        return ResponseEntity.ok(optimizeDeliveis);
     }
 
 
