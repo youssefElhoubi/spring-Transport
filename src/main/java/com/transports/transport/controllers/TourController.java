@@ -1,16 +1,16 @@
 package com.transports.transport.controllers;
 
-import com.transports.transport.DTOS.DelivaryDto;
 import com.transports.transport.DTOS.TourDto;
 import com.transports.transport.MapperImplementation.TourMapperImpl;
 import com.transports.transport.entities.Delivery;
 import com.transports.transport.entities.Tour;
-import com.transports.transport.repository.tourRepository;
 import com.transports.transport.service.TourService;
+import com.transports.transport.utils.TourOptimizer;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -50,6 +50,21 @@ public class TourController {
         }
         tourService.deleteById(id);
         return  ResponseEntity.ok("tour deleted ");
+    }
+    @GetMapping("/optimize/{id}")
+    public  ResponseEntity<HashMap<String,Object>> optimiseTour(@PathVariable Long id){
+        Tour tour = tourService.findById(id);
+        List<Delivery> optimizeDiliveis = TourOptimizer.sortDeliveriesByNearest(tour);
+        HashMap<String,Object> response = new HashMap<>();
+        response.put("massage","list of the optimize Delivery points");
+        response.put("points",optimizeDiliveis);
+        return ResponseEntity.ok(response);
+    }
+    @GetMapping("total/{id}")
+    public  ResponseEntity<?> totalDistance(@PathVariable Long id){
+        Tour tour = tourService.findById(id);
+        Double distance = TourOptimizer.totalDistance(tour);
+        return ResponseEntity.ok(distance);
     }
 
 
