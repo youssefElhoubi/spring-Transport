@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -53,10 +54,13 @@ public class TourController {
         return  ResponseEntity.ok("tour deleted ");
     }
     @GetMapping("/optimize/{id}")
-    public  ResponseEntity<?> optimiseTour(@PathVariable Long id){
+    public  ResponseEntity<HashMap<String,Object>> optimiseTour(@PathVariable Long id){
         Tour tour = tourService.findById(id);
         List<Delivery> optimizeDeliveis = NearestPointsSorter.sortDeliveriesByNearest(tour);
-        return ResponseEntity.ok(optimizeDeliveis);
+        HashMap<String,Object> response = new HashMap<>();
+        response.put("massage","list of the optimize Delivery points");
+        response.put("points",optimizeDeliveis);
+        return ResponseEntity.ok(response);
     }
 
 
