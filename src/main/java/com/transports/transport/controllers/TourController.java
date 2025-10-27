@@ -1,11 +1,9 @@
 package com.transports.transport.controllers;
 
-import com.transports.transport.DTOS.DelivaryDto;
 import com.transports.transport.DTOS.TourDto;
 import com.transports.transport.MapperImplementation.TourMapperImpl;
 import com.transports.transport.entities.Delivery;
 import com.transports.transport.entities.Tour;
-import com.transports.transport.repository.tourRepository;
 import com.transports.transport.service.TourService;
 import com.transports.transport.utils.NearestPointsSorter;
 import org.springframework.http.ResponseEntity;
@@ -61,6 +59,12 @@ public class TourController {
         response.put("massage","list of the optimize Delivery points");
         response.put("points",optimizeDeliveis);
         return ResponseEntity.ok(response);
+    }
+    @GetMapping("total/{id}")
+    public  ResponseEntity<?> totalDistance(@PathVariable Long id){
+        Tour tour = tourService.findById(id);
+        Double distance = NearestPointsSorter.totalDistance(tour);
+        return ResponseEntity.ok(distance);
     }
 
 

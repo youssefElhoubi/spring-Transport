@@ -55,7 +55,7 @@ public class NearestPointsSorter {
         }
         return sorted;
     }
-    public static Double totaleDestance(Tour tour){
+    public static Double totalDistance(Tour tour){
         List<Delivery> deliveries = sortDeliveriesByNearest(tour);
         Warehouse warehouse = tour.getWarehouse();
 
