@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
 import static java.lang.Math.*;
 
 
-public class NearestPointsSorter {
+public class TourOptimizer {
     public static double haversine(double lat1, double lon1, double lat2, double lon2) {
         double R = 6371; // Radius of Earth in km
         double dLat = toRadians(lat2 - lat1);
